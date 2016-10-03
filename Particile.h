@@ -89,8 +89,6 @@ class Particle {
 
     static constexpr double molar = 0.029;
 
-    double vx_dir12 ;
-    double vy_dir12 ;
 
 public:
 
@@ -222,26 +220,18 @@ public:
 
     //пересчет значений
     void ronge_kutt(double dt){
+        pressure = energy * (k_costil -1) * density;
+        pos.x += dt * vx;
+        //
+
         density += dt * density_dir;
+
         energy +=  dt * energy_dir;
-        vx +=      dt * vx_dir;
+        //if(energy < 0) energy = 0;
         vy = 0;
         //
-        pos.x += dt * vx;
-        pos.y += dt * vy;
-        pressure = energy * (k_costil -1) * density;
-
-    }
-    //
-    void leap_frog(double dt){
-        density += dt * density_dir;
-        energy +=  dt * energy_dir;
-        vx +=      dt * vx_dir + vx_dir12 ;
-        vy +=      dt *vy_dir + vy_dir12 ;
-        //
-        pos.x += dt * vx;
-        pos.y += dt * vy;
-        pressure = energy * (k_costil -1) * density;
+        vx += dt * vx_dir;
+        pos.y = 0;
     }
     //
     void set_from(Particle& data) {

@@ -27,7 +27,11 @@ protected:
 
     double left, right;
 
-    int N;
+    int bigPN = 80;
+
+    int ghoustN = 15;
+
+    int N ;
 
     double grad_w_test( double x );
 
@@ -36,6 +40,10 @@ protected:
     double two_part_v(const Particle &a, const Particle &b );
 
     double two_part_energy(const Particle &a, const Particle &b );
+
+    double two_part_art_visc(const Particle &a, const Particle &b);
+
+    double two_part_a;
 
     void calculate_dir();
 

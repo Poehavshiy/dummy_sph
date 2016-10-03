@@ -16,6 +16,7 @@ Particle::Particle():pos(0, 0) {
     vy = 0;
     //
     mass = 0;
+
 };
 
 //
@@ -33,5 +34,10 @@ Particle::Particle(bool status, double p,
     mass = M;
 
     p0 = p;
+    //
+    density_dir = 0;
+    energy_dir = 0;
+    vx_dir = 0;
+    vy_dir = 0;
 };
 //

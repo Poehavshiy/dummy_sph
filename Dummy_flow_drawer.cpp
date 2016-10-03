@@ -5,13 +5,14 @@
 #include "Dummy_flow_drawer.h"
 Dummy_flow_drawer::Dummy_flow_drawer() :
         Dummy_flow() {
-    cof = 1000;
+    cof = 600;
     cofx = -100;
     cofy = 100;
     python_iter = 0;
     for(int i = 20; i<2000; i+=20){
         frames.push_back(i);
     }
+    write_py_data(0);
 
 };
 
@@ -48,13 +49,19 @@ void Dummy_flow_drawer::draw_data(QGraphicsScene *scene){
     double rad = 1;
     for (int i = 0; i < data.size(); ++i) {
         const Particle& curent = data[i];
-        double value = data[i].P();
+        double value = data[i].p();
         COLOUR currentC = GetColour(value, 0, max_P);
         QColor QTcurrentC;
         QTcurrentC.setRgb(255 * currentC.r, 255 * currentC.g, 255 * currentC.b);
         scene->addEllipse( (curent.X() ) * cof - rad + cofx, cofy, rad * 2.0, rad * 2.0,
                           QTcurrentC, QBrush(QTcurrentC));
+        //парметры
+        //set_text("", scene, pair<int, int>( int(curent.X() * cof - rad + cofx-10), 0), std::move(i));
     }
+    set_text("P=", scene, pair<int, int>( int(data[97].X() * cof - rad + cofx-10), 0), data[97].P());
+    set_text("E=", scene, pair<int, int>( int(data[97].X() * cof - rad + cofx-10), 10), data[97].E());
+    set_text("p=", scene, pair<int, int>( int(data[97].X() * cof - rad + cofx-10), 20), data[97].p());
+    set_text("V=", scene, pair<int, int>( int(data[97].X() * cof - rad + cofx-10), 30), data[97].Vx());
 }
 
 void Dummy_flow_drawer::set_text(QString &&text, QGraphicsScene *scene, pair<int, int> &&position, double &&value) {

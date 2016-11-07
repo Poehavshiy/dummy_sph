@@ -55,8 +55,6 @@ void Dummy_flow_drawer::draw_data(QGraphicsScene *scene){
         QTcurrentC.setRgb(255 * currentC.r, 255 * currentC.g, 255 * currentC.b);
         scene->addEllipse( (curent.X() ) * cof - rad + cofx, cofy, rad * 2.0, rad * 2.0,
                           QTcurrentC, QBrush(QTcurrentC));
-        //парметры
-        //set_text("", scene, pair<int, int>( int(curent.X() * cof - rad + cofx-10), 0), std::move(i));
     }
     set_text("P=", scene, pair<int, int>( int(data[97].X() * cof - rad + cofx-10), 0), data[97].P());
     set_text("E=", scene, pair<int, int>( int(data[97].X() * cof - rad + cofx-10), 10), data[97].E());
@@ -73,7 +71,7 @@ void Dummy_flow_drawer::set_text(QString &&text, QGraphicsScene *scene, pair<int
 
 void Dummy_flow_drawer::show_information(QGraphicsScene *scene) {
     set_text("iteration=", scene, pair<int, int>(-50, -150), std::move(iteration));
-    set_text("time=", scene, pair<int, int>(-50, -130), std::move(curent_time));
+    set_text("time=", scene, pair<int, int>(-50, -130), std::move(time()));
     set_text("maxP=", scene, pair<int, int>(-50, -110), std::move(max_P));
     set_text("minP=", scene, pair<int, int>(-50, -90), std::move(min_P));
     set_text("maxV=", scene, pair<int, int>(50, -150), std::move(max_V));
@@ -95,8 +93,9 @@ void Dummy_flow_drawer::calculate_step(QGraphicsScene *scene) {
     calculate();
     draw_data(scene);
     show_information(scene);
-    if (iteration == frames[python_iter]) {
+    /*if (iteration == frames[python_iter]) {
         ++python_iter;
         write_py_data(python_iter);
-    }
+    }*/
+    write_py_data(iteration);
 }

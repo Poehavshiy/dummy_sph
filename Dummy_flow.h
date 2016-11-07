@@ -13,9 +13,11 @@ protected:
     //массив всех частиц
     vector<Particle> data;
 
-    int iteration;
+    int iteration = 0;
 
-    double dt;
+    double curent_time = 0;
+
+    double dt = 0.001;
 
     double h;
 
@@ -25,42 +27,32 @@ protected:
     double max_P = 0;
     double min_P = 100500;
 
-    double left, right;
+    double left , right;
 
-    int bigPN = 80;
+    int bigPN;
 
-    int ghoustN = 15;
+    int ghoustN ;
 
     int N ;
 
-    double grad_w_test( double x );
-
-    double two_part_p(const Particle &a, const Particle &b );
-
-    double two_part_v(const Particle &a, const Particle &b );
-
-    double two_part_energy(const Particle &a, const Particle &b );
-
-    double two_part_art_visc(const Particle &a, const Particle &b);
-
-    double two_part_a;
+    int begin;
+    int end;
 
     void calculate_dir();
 
     void calculate_final();
 
-    double curent_time;
+    void init_Bykov();
 
+    void init_shock_tube_book();
+
+    void test_W();
 public:
     //конструктор, тут инициализируются начальные параметры потока
     Dummy_flow();
 
     double  time(){
         return curent_time;
-    }
-
-    int get_iteration(){
-        return iteration;
     }
 
     void calculate();

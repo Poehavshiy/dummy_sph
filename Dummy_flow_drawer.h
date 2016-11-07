@@ -6,7 +6,20 @@
 #define DUMMY_SPH_DUMMY_FLOW_DRAWER_H
 
 #include "Dummy_flow.h"
-
+#include <QMainWindow>
+#include <QGraphicsView>
+#include <QGraphicsScene>
+#include <QGraphicsEllipseItem>
+#include <QMouseEvent>
+#include <QPointF>
+#include <QPushButton>
+#include <QVBoxLayout>
+#include <QMenu>
+#include <QtGui>
+#include <QMenuBar>
+#include <QToolButton>
+#include <QtWidgets>
+//
 class Dummy_flow_drawer: public Dummy_flow {
     typedef struct {
         double r,g,b;
